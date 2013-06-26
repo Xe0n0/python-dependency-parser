@@ -19,7 +19,7 @@ class AEMachine:
 
 	def left_arc(self):
 		token = self.stack.pop(-1)
-		self.token_list[0].add_child(token)
+		self.token_list[0].insert_child(token)
 
 	def right_arc(self):
 		token = self.token_list.pop(0)
@@ -81,8 +81,8 @@ class AEMachine:
 				self.shift()
 				# print 'shift'
 
-			print self.stack, self.token_list[:1]
-		# self.display()
+			# print self.stack, self.token_list[:1]
+		self.display()
 
 
 	def display(self):
@@ -101,6 +101,9 @@ class Token:
 
 	def add_child(self, token):
 		self.childs.append(token)
+
+	def insert_child(self, token):
+		self.childs.insert(0, token)
 
 	def features(self, prefix):
 		if self.code is '$' or '#':
