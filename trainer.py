@@ -3,6 +3,7 @@
 
 trainer_output_path = 'trainer_output.txt'
 trainer_svm_input = 'sample_input.txt'
+from nltk.tree import Tree
 
 class AEMachine:
 	def __init__(self, token_list):
@@ -81,13 +82,11 @@ class AEMachine:
 				# print 'shift'
 
 			print self.stack, self.token_list[:1]
-
-
 		# self.display()
 
 
 	def display(self):
-		self.stack[-1].display()
+		self.stack[-1].get_nltk_tree().draw()
 
 class Token:
 	def __init__(self, code, index=-1, father=-2, tag='$'):
@@ -127,6 +126,13 @@ class Token:
 
 		elif prefix == 1:
 			return [{14: self.code, 15: self.tag}]
+
+	def get_nltk_tree(self):
+
+		child_trees = [c.get_nltk_tree() for c in self.childs]
+
+		t = Tree(self.__repr__(), child_trees)
+		return t
 
 	def display(self, prefix=''):
 		print '{}({}'.format(prefix, self.code)
