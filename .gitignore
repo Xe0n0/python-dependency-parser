@@ -37,3 +37,7 @@ nosetests.xml
 
 # Customized
 *.log
+report.*
+features/
+data/
+models/
